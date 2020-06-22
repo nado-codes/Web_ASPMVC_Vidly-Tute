@@ -1,4 +1,4 @@
-﻿@model System.Data.Entity.DbSet<ASPVidly.Models.Customer>
+﻿@model System.Data.Entity.Infrastructure.DbQuery<ASPVidly.Models.Customer>
 @{
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,15 +16,15 @@ else
         <thead>
             <tr>
                 <th>Customer</th>
-                <th>DiscountRate</th>
+                <th>Membership Type</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var customer in Model)
             {
                 <tr>
-                    <td>@customer.Name</td>
-                    <!--<td>//Html.ActionLink(customer.Name,"Details","Customers",new {id = customer.Id},null)</td>-->
+                    <td>@Html.ActionLink(customer.Name,"Details","Customers",new {id = customer.Id},null)</td>
+                    <td>@customer.MembershipType.Name</td>
                 </tr>
             }
         </tbody>

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ASPTute_Vidly.Models;
 using ASPVidly.Models;
 using ASPVidly.ViewModels;
+using System.Data.Entity;
 
 namespace ASPVidly.Controllers
 {
@@ -34,7 +35,7 @@ namespace ASPVidly.Controllers
         
         public ViewResult Index()
         {
-            var customers = _context.Customers;
+            var customers = _context.Customers.Include(c => c.MembershipType);
 
             return View(customers);
         }
@@ -45,7 +46,7 @@ namespace ASPVidly.Controllers
             if (id == null)
                 return RedirectToAction("Index");
 
-            Customer customer = _context.Customers.FirstOrDefault(c => c.Id == id);
+            Customer customer = _context.Customers.Include(c => c.MembershipType).FirstOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return View("UnknownCustomer");
