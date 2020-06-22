@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using ASPTute_Vidly.Models;
+using ASPVidly.Models;
+using ASPVidly.ViewModels;
+
+namespace ASPVidly.Controllers
+{
+    public class CustomersController : Controller
+    {
+        private ApplicationDbContext _context;
+
+        public CustomersController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        /*List<Customer> customers = new List<Customer>()
+        {
+            new Customer {Id = 1, Name = "Nathan"},
+            new Customer {Id = 2, Name = "Jasmine"},
+            new Customer {Id = 3, Name = "Jonathan"}
+        };*/
+
+        // GET: Customers
+        
+        public ViewResult Index()
+        {
+            var customers = _context.Customers;
+
+            return View(customers);
+        }
+
+        [Route("customers/{id}")]
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index");
+
+            Customer customer = _context.Customers.FirstOrDefault(c => c.Id == id);
+
+            if (customer == null)
+                return View("UnknownCustomer");
+            else
+            {
+                return View("CustomerDetail", customer);
+            }
+        }
+    }
+}
