@@ -23,15 +23,6 @@ namespace ASPVidly.Controllers
         {
             _context.Dispose();
         }
-
-        /*List<Customer> customers = new List<Customer>()
-        {
-            new Customer {Id = 1, Name = "Nathan"},
-            new Customer {Id = 2, Name = "Jasmine"},
-            new Customer {Id = 3, Name = "Jonathan"}
-        };*/
-
-        // GET: Customers
         
         public ViewResult Index()
         {

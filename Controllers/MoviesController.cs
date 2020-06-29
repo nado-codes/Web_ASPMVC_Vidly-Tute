@@ -6,38 +6,13 @@ using System.Web.Mvc;
 using ASPTute_Vidly.Models;
 using ASPVidly.Models;
 using ASPVidly.ViewModels;
+using System.Data.Entity;
 
 namespace ASPVidly.Controllers
 {
     public class MoviesController : Controller
     {
         private ApplicationDbContext _context;
-        /*List<Movie> movies = new List<Movie>()
-        {
-            new Movie() {Id = 1, Name = "Shrek"},
-            new Movie() {Id = 2, Name = "Wall-E"}
-        };*/
-
-        // GET: Movies
-        /*public ActionResult Random()
-        {
-            var movie = new Movie() {Name = "Shrek"};
-
-            List<Customer> customers = new List<Customer>()
-            {
-                new Customer {Name = "Customer 1"},
-                new Customer {Name = "Customer 2"},
-                new Customer {Name = "Customer 3"}
-            };
-
-            var viewModel = new RandomMovieViewModel()
-            {
-                Movie = movie,
-                Customers = customers
-            };
-
-            return View(viewModel);
-        }*/
 
         public MoviesController()
         {
@@ -54,20 +29,20 @@ namespace ASPVidly.Controllers
             return Content("id = " + id);
         }
 
-        public ActionResult Index()
+        public ViewResult Index()
         {
-            //var movies = _context.Movies.Include(c => c.Genre);
+            var movies = _context.Movies.Include(c => c.Genre);
 
-            return View();
+            return View(movies);
         }
 
         [Route("movies/{id}")]
-        public ActionResult GetMovie(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
                 return RedirectToAction("Index");
 
-            Movie movie = null;//_context.Movies.FirstOrDefault(m => m.Id == id);
+            Movie movie = _context.Movies.Include(c => c.Genre).FirstOrDefault(m => m.Id == id);
 
             if (movie == null)
                 return View("UnknownMovie");
