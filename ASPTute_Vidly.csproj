@@ -219,9 +219,86 @@
     <Compile Include="Migrations\202006221951040_UPDATE_Model-Customer.Designer.cs">
       <DependentUpon>202006221951040_UPDATE_Model-Customer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006222125362_POP_Movies.cs" />
+    <Compile Include="Migrations\202006222125362_POP_Movies.Designer.cs">
+      <DependentUpon>202006222125362_POP_Movies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006222148414_ADD_Genres.cs" />
+    <Compile Include="Migrations\202006222148414_ADD_Genres.Designer.cs">
+      <DependentUpon>202006222148414_ADD_Genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006222151574_CREATE_ForeignKey-Movies_Genres.cs" />
+    <Compile Include="Migrations\202006222151574_CREATE_ForeignKey-Movies_Genres.Designer.cs">
+      <DependentUpon>202006222151574_CREATE_ForeignKey-Movies_Genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006222223579_POP_Genres.cs" />
+    <Compile Include="Migrations\202006222223579_POP_Genres.Designer.cs">
+      <DependentUpon>202006222223579_POP_Genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006250725055_REMOVE-Genres.cs" />
+    <Compile Include="Migrations\202006250725055_REMOVE-Genres.Designer.cs">
+      <DependentUpon>202006250725055_REMOVE-Genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006250726138_REMOVE-Genres_v2.cs" />
+    <Compile Include="Migrations\202006250726138_REMOVE-Genres_v2.Designer.cs">
+      <DependentUpon>202006250726138_REMOVE-Genres_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260037137_ADD-ForeignKey_Genres.cs" />
+    <Compile Include="Migrations\202006260037137_ADD-ForeignKey_Genres.Designer.cs">
+      <DependentUpon>202006260037137_ADD-ForeignKey_Genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260043181_POP_Genres1.cs" />
+    <Compile Include="Migrations\202006260043181_POP_Genres1.Designer.cs">
+      <DependentUpon>202006260043181_POP_Genres1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260046210_DELETE_Genres.cs" />
+    <Compile Include="Migrations\202006260046210_DELETE_Genres.Designer.cs">
+      <DependentUpon>202006260046210_DELETE_Genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260048455_DELETE-ForeignKey_Genres.cs" />
+    <Compile Include="Migrations\202006260048455_DELETE-ForeignKey_Genres.Designer.cs">
+      <DependentUpon>202006260048455_DELETE-ForeignKey_Genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260049354_DELETE-ForeignKey_Genres-v2.cs" />
+    <Compile Include="Migrations\202006260049354_DELETE-ForeignKey_Genres-v2.Designer.cs">
+      <DependentUpon>202006260049354_DELETE-ForeignKey_Genres-v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260053314_DELETE-ForeignKey_Genres-v3.cs" />
+    <Compile Include="Migrations\202006260053314_DELETE-ForeignKey_Genres-v3.Designer.cs">
+      <DependentUpon>202006260053314_DELETE-ForeignKey_Genres-v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260056173_DELETE-ForeignKey_Genres-v4.cs" />
+    <Compile Include="Migrations\202006260056173_DELETE-ForeignKey_Genres-v4.Designer.cs">
+      <DependentUpon>202006260056173_DELETE-ForeignKey_Genres-v4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260116207_DELETE_Movies.cs" />
+    <Compile Include="Migrations\202006260116207_DELETE_Movies.Designer.cs">
+      <DependentUpon>202006260116207_DELETE_Movies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260118475_CREATE-Table_Movies.cs" />
+    <Compile Include="Migrations\202006260118475_CREATE-Table_Movies.Designer.cs">
+      <DependentUpon>202006260118475_CREATE-Table_Movies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260121400_POP_Genres-v2.cs" />
+    <Compile Include="Migrations\202006260121400_POP_Genres-v2.Designer.cs">
+      <DependentUpon>202006260121400_POP_Genres-v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260137536_RESET-Tables_Movies_Genres.cs" />
+    <Compile Include="Migrations\202006260137536_RESET-Tables_Movies_Genres.Designer.cs">
+      <DependentUpon>202006260137536_RESET-Tables_Movies_Genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260149172_ADD-Tables_Movies_Genres.cs" />
+    <Compile Include="Migrations\202006260149172_ADD-Tables_Movies_Genres.Designer.cs">
+      <DependentUpon>202006260149172_ADD-Tables_Movies_Genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006260150289_POP_Genres2.cs" />
+    <Compile Include="Migrations\202006260150289_POP_Genres2.Designer.cs">
+      <DependentUpon>202006260150289_POP_Genres2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
@@ -350,6 +427,63 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006221951040_UPDATE_Model-Customer.resx">
       <DependentUpon>202006221951040_UPDATE_Model-Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006222125362_POP_Movies.resx">
+      <DependentUpon>202006222125362_POP_Movies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006222148414_ADD_Genres.resx">
+      <DependentUpon>202006222148414_ADD_Genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006222151574_CREATE_ForeignKey-Movies_Genres.resx">
+      <DependentUpon>202006222151574_CREATE_ForeignKey-Movies_Genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006222223579_POP_Genres.resx">
+      <DependentUpon>202006222223579_POP_Genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006250725055_REMOVE-Genres.resx">
+      <DependentUpon>202006250725055_REMOVE-Genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006250726138_REMOVE-Genres_v2.resx">
+      <DependentUpon>202006250726138_REMOVE-Genres_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260037137_ADD-ForeignKey_Genres.resx">
+      <DependentUpon>202006260037137_ADD-ForeignKey_Genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260043181_POP_Genres1.resx">
+      <DependentUpon>202006260043181_POP_Genres1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260046210_DELETE_Genres.resx">
+      <DependentUpon>202006260046210_DELETE_Genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260048455_DELETE-ForeignKey_Genres.resx">
+      <DependentUpon>202006260048455_DELETE-ForeignKey_Genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260049354_DELETE-ForeignKey_Genres-v2.resx">
+      <DependentUpon>202006260049354_DELETE-ForeignKey_Genres-v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260053314_DELETE-ForeignKey_Genres-v3.resx">
+      <DependentUpon>202006260053314_DELETE-ForeignKey_Genres-v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260056173_DELETE-ForeignKey_Genres-v4.resx">
+      <DependentUpon>202006260056173_DELETE-ForeignKey_Genres-v4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260116207_DELETE_Movies.resx">
+      <DependentUpon>202006260116207_DELETE_Movies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260118475_CREATE-Table_Movies.resx">
+      <DependentUpon>202006260118475_CREATE-Table_Movies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260121400_POP_Genres-v2.resx">
+      <DependentUpon>202006260121400_POP_Genres-v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260137536_RESET-Tables_Movies_Genres.resx">
+      <DependentUpon>202006260137536_RESET-Tables_Movies_Genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260149172_ADD-Tables_Movies_Genres.resx">
+      <DependentUpon>202006260149172_ADD-Tables_Movies_Genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006260150289_POP_Genres2.resx">
+      <DependentUpon>202006260150289_POP_Genres2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
