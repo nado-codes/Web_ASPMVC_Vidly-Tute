@@ -16,6 +16,7 @@ namespace ASPTute_Vidly
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            VidlyMapper.RegisterMappings();
         }
     }
 }

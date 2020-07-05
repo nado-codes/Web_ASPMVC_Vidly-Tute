@@ -7,26 +7,64 @@ using ASPTute_Vidly.Models;
 using ASPVidly.Models;
 using ASPVidly.ViewModels;
 using System.Data.Entity;
+using ASPTute_Vidly.ViewModels;
+using ASPTute_Vidly.Controllers;
 
 namespace ASPVidly.Controllers
 {
-    public class MoviesController : Controller
+    public class MoviesController : DbController
     {
-        private ApplicationDbContext _context;
-
-        public MoviesController()
+        public ActionResult New()
         {
-            _context = new ApplicationDbContext();
+            return ViewFor<MovieFormViewModel>("MovieForm");
         }
 
-        protected override void Dispose(bool disposing)
+        [HttpPost]
+        public ActionResult Save(Movie movie)
         {
-            _context.Dispose();
+            if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
+
+                _context.Movies.Add(movie); //..Create a new movie
+            }
+            else
+            {
+                //..Since we're editing, get a copy of the movie we want to edit
+                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+
+                //Mapper.Map(customer, customerInDb);
+                // ^ Ordinarily, we'd create a custom DTO (Data Transfer object) and pass it to
+                //       the automapper to update specfic properties rather than all of them.
+                //
+
+                movieInDb.Name = movie.Name;
+                movieInDb.GenreId = movie.GenreId;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.NumInStock = movie.NumInStock;
+            }
+
+            //..Save the changes
+            _context.SaveChanges();
+
+            //..Return to the original list of movies to see our changes/additions
+            return RedirectToAction("Index", "Movies");
         }
 
         public ActionResult Edit(int id)
         {
-            return Content("id = " + id);
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            var viewModel = new MovieFormViewModel()
+            {
+                Movie = movie,
+                Genres = _context.Genres.ToList()
+            };
+
+            return View("MovieForm", viewModel);
         }
 
         public ViewResult Index()
@@ -36,7 +74,6 @@ namespace ASPVidly.Controllers
             return View(movies);
         }
 
-        [Route("movies/{id}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
