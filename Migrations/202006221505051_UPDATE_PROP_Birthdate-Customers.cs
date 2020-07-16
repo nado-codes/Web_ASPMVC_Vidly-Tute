@@ -7,7 +7,7 @@ namespace ASPTute_Vidly.Migrations
     {
         public override void Up()
         {
-            DropColumn("dbo.Customers", "BirthDate");
+            //DropColumn("dbo.Customers", "BirthDate");
             AddColumn("dbo.Customers", "BirthDate", c => c.DateTime(nullable: true));
             
         }

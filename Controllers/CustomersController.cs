@@ -10,43 +10,51 @@ using System.Data.Entity;
 using ASPTute_Vidly.ViewModels;
 using AutoMapper;
 using ASPTute_Vidly.Controllers;
+using ASPTute_Vidly;
 
 namespace ASPVidly.Controllers
 {
     public class CustomersController : DbController
     {
+        private readonly string CUSTOMER_FORM = "CustomerForm";
+        private readonly string CUSTOMER_DETAIL = "CustomerDetail";
+        private readonly string CUSTOMERS = "Customers";
+        private readonly string UNKNOWN_CUSTOMER = "UnknownCustomer";
+        private readonly string INDEX = "Index";
+        
         public ActionResult New()
         {
-            return ViewFor<CustomerFormViewModel>("CustomerForm");
+            return ViewFor<CustomerFormViewModel>(CUSTOMER_FORM);
         }
 
         [HttpPost]
         public ActionResult Save(Customer customer)
         {
+            if(!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+
+                return View(CUSTOMER_FORM, viewModel);
+            }
+
             if(customer.Id == 0)
                 _context.Customers.Add(customer); //..Create a new customer
             else
             {
                 //..Since we're editing, get a copy of the customer we want to edit
                 var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
-
-                //Mapper.Map(customer, customerInDb);
-                // ^ Ordinarily, we'd create a custom DTO (Data Transfer object) and pass it to
-                //       the automapper to update specfic properties rather than all of them.
-                //
-
-                //..update the properties
-                customerInDb.Name = customer.Name;
-                customerInDb.BirthDate = customer.BirthDate;
-                customerInDb.MembershipTypeId = customer.MembershipTypeId;
-                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+                VidlyMapper.Map(customer, customerInDb);
             }
 
             //..Save the changes
             _context.SaveChanges();
 
             //..Return to the original list of customers to see our changes/additions
-            return RedirectToAction("Index", "Customers");
+            return RedirectToAction(INDEX, CUSTOMERS);
         }
 
         public ViewResult Index()
@@ -59,15 +67,15 @@ namespace ASPVidly.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-                return RedirectToAction("Index");
+                return RedirectToAction(INDEX);
 
             Customer customer = _context.Customers.Include(c => c.MembershipType).FirstOrDefault(c => c.Id == id);
 
             if (customer == null)
-                return View("UnknownCustomer");
+                return View(UNKNOWN_CUSTOMER);
             else
             {
-                return View("CustomerDetail", customer);
+                return View(CUSTOMER_DETAIL, customer);
             }
         }
 
@@ -84,7 +92,7 @@ namespace ASPVidly.Controllers
                 MembershipTypes = _context.MembershipTypes.ToList()
             };
 
-            return View("CustomerForm", viewModel);
+            return View(CUSTOMER_FORM, viewModel);
         }
     }
 }

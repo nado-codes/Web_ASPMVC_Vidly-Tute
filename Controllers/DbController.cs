@@ -31,11 +31,11 @@ namespace ASPTute_Vidly.Controllers
         /// <typeparam name="V"></typeparam>
         /// <param name="viewName"></param>
         /// <returns></returns>
-        protected ActionResult ViewFor<V>(string viewName) where V : new()
+        protected ActionResult ViewFor<V>(string viewName, V viewModel = default(V)) where V : new()
         {
-            V viewModel = VidlyMapper.Map(_context, new V());
+            V newViewModel = (viewModel == null) ? VidlyMapper.Map(_context, new V()) : viewModel;
 
-            return View(viewName,viewModel);
+            return View(viewName, newViewModel);
         }
     }
 }
