@@ -5,6 +5,7 @@ using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace ASPTute_Vidly
@@ -47,7 +48,9 @@ namespace ASPTute_Vidly
             if(!HasMap<S,D>())
                 throw new MissingMapException<S, D>();
 
-            return _mapper.Map(source, (destination != null) ? destination : new D());
+            D mappedObject = _mapper.Map(source, (destination != null) ? destination : new D());
+
+            return mappedObject;
         }
     }
 }

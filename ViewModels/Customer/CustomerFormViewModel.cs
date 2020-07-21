@@ -11,5 +11,11 @@ namespace ASPTute_Vidly.ViewModels
     {
         public IEnumerable<MembershipType> MembershipTypes { get; set; }
         public Customer Customer { get; set; }
+
+        public CustomerFormViewModel()
+        {
+            Customer = new Customer();
+        }
+
     }
 }

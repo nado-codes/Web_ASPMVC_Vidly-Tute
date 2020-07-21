@@ -7,6 +7,7 @@ using ASPTute_Vidly.Models;
 using ASPVidly.Models;
 using ASPVidly.ViewModels;
 using System.Data.Entity;
+using System.Web.WebSockets;
 using ASPTute_Vidly.ViewModels;
 using AutoMapper;
 using ASPTute_Vidly.Controllers;
@@ -28,6 +29,7 @@ namespace ASPVidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
             if(!ModelState.IsValid)

@@ -12,7 +12,7 @@ namespace ASPVidly.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "You need to enter a name!")]
         [StringLength(255)]
         public string Name { get; set; }
 
@@ -24,6 +24,7 @@ namespace ASPVidly.Models
         public byte MembershipTypeId { get; set; }
 
         [DisplayName("Date of Birth")]
+        [Min18YearsIfMember]
         public DateTime? BirthDate { get; set; }
     }
 }
