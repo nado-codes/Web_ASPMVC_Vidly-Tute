@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ASPTute_Vidly.Models;
 using ASPVidly.Models;
-using ASPVidly.ViewModels;
+using ASPTute_Vidly.ViewModels;
 using System.Data.Entity;
 using System.Web.WebSockets;
 using ASPTute_Vidly.ViewModels;
@@ -36,9 +36,10 @@ namespace ASPVidly.Controllers
             {
                 var viewModel = new CustomerFormViewModel
                 {
-                    Customer = customer,
                     MembershipTypes = _context.MembershipTypes.ToList()
                 };
+
+                VidlyMapper.Map(customer, viewModel);
 
                 return View(CUSTOMER_FORM, viewModel);
             }
@@ -90,9 +91,10 @@ namespace ASPVidly.Controllers
 
             var viewModel = new CustomerFormViewModel()
             {
-                Customer = customer,
                 MembershipTypes = _context.MembershipTypes.ToList()
             };
+
+            VidlyMapper.Map(customer, viewModel);
 
             return View(CUSTOMER_FORM, viewModel);
         }

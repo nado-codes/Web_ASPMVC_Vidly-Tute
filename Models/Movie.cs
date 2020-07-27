@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using ASPTute_Vidly.Models;
+using ASPTute_Vidly.Models.Validation;
 
 namespace ASPVidly.Models
 {
@@ -24,6 +25,7 @@ namespace ASPVidly.Models
         public DateTime DateAdded { get; set; }
 
         [DisplayName("Number In Stock")]
+        [Range(1,20)]
         public byte NumInStock { get; set; }
 
         public Genre Genre { get; set; }

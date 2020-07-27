@@ -25,6 +25,8 @@ namespace ASPTute_Vidly
                 cfg.CreateMap<ApplicationDbContext, MovieFormViewModel>();
                 cfg.CreateMap<ApplicationDbContext, CustomerFormViewModel>();
                 cfg.CreateMap<Customer, Customer>();
+                cfg.CreateMap<Movie, MovieFormViewModel>();
+                cfg.CreateMap<Customer, CustomerFormViewModel>();
             });
 
             _mapper = new Mapper(config);

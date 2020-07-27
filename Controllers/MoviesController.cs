@@ -5,8 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using ASPTute_Vidly.Models;
 using ASPVidly.Models;
-using ASPVidly.ViewModels;
+using ASPTute_Vidly.ViewModels;
 using System.Data.Entity;
+using ASPTute_Vidly;
 using ASPTute_Vidly.ViewModels;
 using ASPTute_Vidly.Controllers;
 
@@ -14,6 +15,8 @@ namespace ASPVidly.Controllers
 {
     public class MoviesController : DbController
     {
+        private readonly string MOVIE_FORM = "MovieForm";
+
         public ActionResult New()
         {
             return ViewFor<MovieFormViewModel>("MovieForm");
@@ -22,6 +25,11 @@ namespace ASPVidly.Controllers
         [HttpPost]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                return ViewFor<MovieFormViewModel>(MOVIE_FORM);
+            }
+
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;
@@ -60,11 +68,12 @@ namespace ASPVidly.Controllers
 
             var viewModel = new MovieFormViewModel()
             {
-                Movie = movie,
                 Genres = _context.Genres.ToList()
             };
 
-            return View("MovieForm", viewModel);
+            VidlyMapper.Map(movie, viewModel);
+
+            return ViewFor(MOVIE_FORM, viewModel);
         }
 
         public ViewResult Index()
