@@ -34,12 +34,6 @@ namespace ASPTute_Vidly.ViewModels
 
         public Genre Genre { get; set; }
 
-        public string Title
-        {
-            get
-            {
-                return Id != 0 ? "Edit Movie" : "New Movie";
-            }
-        }
+        public string Title => Id != 0 ? "Edit Movie" : "New Movie";
     }
 }

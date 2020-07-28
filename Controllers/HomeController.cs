@@ -8,6 +8,8 @@ namespace ASPTute_Vidly.Controllers
 {
     public class HomeController : Controller
     {
+        public static string APP_TITLE = "ASPTute_Vidly";
+
         public ActionResult Index()
         {
             return View();

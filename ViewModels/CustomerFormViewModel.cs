@@ -29,13 +29,6 @@ namespace ASPTute_Vidly.ViewModels
         [Min18YearsIfMember]
         public DateTime? BirthDate { get; set; }
 
-        public string Title
-        {
-            get
-            {
-                return (Id != 0) ? "Edit Customer" : "New Customer";
-            }
-        }
-
+        public string Title => Id != 0 ? "Edit Customer" : "New Customer";
     }
 }
