@@ -15,7 +15,7 @@ using ASPTute_Vidly;
 
 namespace ASPVidly.Controllers
 {
-    public class CustomersController : DbController
+    public class CustomersController : Controller
     {
         private readonly string CUSTOMER_FORM = "CustomerForm";
         private readonly string CUSTOMER_DETAIL = "CustomerDetail";
@@ -25,7 +25,7 @@ namespace ASPVidly.Controllers
         
         public ActionResult New()
         {
-            return ViewFor<CustomerFormViewModel>(CUSTOMER_FORM);
+            return RepoController.ViewFor<CustomerFormViewModel>(CUSTOMER_FORM);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace ASPVidly.Controllers
             {
                 var viewModel = new CustomerFormViewModel
                 {
-                    MembershipTypes = _context.MembershipTypes.ToList()
+                    MembershipTypes = RepoController.Context.MembershipTypes.ToList()
                 };
 
                 VidlyMapper.Map(customer, viewModel);
@@ -45,16 +45,16 @@ namespace ASPVidly.Controllers
             }
 
             if(customer.Id == 0)
-                _context.Customers.Add(customer); //..Create a new customer
+                RepoController.Context.Customers.Add(customer); //..Create a new customer
             else
             {
                 //..Since we're editing, get a copy of the customer we want to edit
-                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+                var customerInDb = RepoController.Context.Customers.Single(c => c.Id == customer.Id);
                 VidlyMapper.Map(customer, customerInDb);
             }
 
             //..Save the changes
-            _context.SaveChanges();
+            RepoController.Context.SaveChanges();
 
             //..Return to the original list of customers to see our changes/additions
             return RedirectToAction(INDEX, CUSTOMERS);
@@ -62,7 +62,7 @@ namespace ASPVidly.Controllers
 
         public ViewResult Index()
         {
-            var customers = _context.Customers.Include(c => c.MembershipType);
+            var customers = RepoController.Context.Customers.Include(c => c.MembershipType);
 
             return View(customers);
         }
@@ -72,7 +72,7 @@ namespace ASPVidly.Controllers
             if (id == null)
                 return RedirectToAction(INDEX);
 
-            Customer customer = _context.Customers.Include(c => c.MembershipType).FirstOrDefault(c => c.Id == id);
+            Customer customer = RepoController.Context.Customers.Include(c => c.MembershipType).FirstOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return View(UNKNOWN_CUSTOMER);
@@ -84,14 +84,14 @@ namespace ASPVidly.Controllers
 
         public ActionResult Edit(int id)
         {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var customer = RepoController.Context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return HttpNotFound();
 
             var viewModel = new CustomerFormViewModel()
             {
-                MembershipTypes = _context.MembershipTypes.ToList()
+                MembershipTypes = RepoController.Context.MembershipTypes.ToList()
             };
 
             VidlyMapper.Map(customer, viewModel);

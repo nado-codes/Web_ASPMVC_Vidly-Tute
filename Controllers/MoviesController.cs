@@ -13,13 +13,13 @@ using ASPTute_Vidly.Controllers;
 
 namespace ASPVidly.Controllers
 {
-    public class MoviesController : DbController
+    public class MoviesController : Controller
     {
         private readonly string MOVIE_FORM = "MovieForm";
 
         public ActionResult New()
         {
-            return ViewFor<MovieFormViewModel>("MovieForm");
+            return RepoController.ViewFor<MovieFormViewModel>("MovieForm");
         }
 
         [HttpPost]
@@ -27,19 +27,19 @@ namespace ASPVidly.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return ViewFor<MovieFormViewModel>(MOVIE_FORM);
+                return RepoController.ViewFor<MovieFormViewModel>(MOVIE_FORM);
             }
 
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;
 
-                _context.Movies.Add(movie); //..Create a new movie
+                RepoController.Context.Movies.Add(movie); //..Create a new movie
             }
             else
             {
                 //..Since we're editing, get a copy of the movie we want to edit
-                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+                var movieInDb = RepoController.Context.Movies.Single(m => m.Id == movie.Id);
 
                 //Mapper.Map(customer, customerInDb);
                 // ^ Ordinarily, we'd create a custom DTO (Data Transfer object) and pass it to
@@ -53,7 +53,7 @@ namespace ASPVidly.Controllers
             }
 
             //..Save the changes
-            _context.SaveChanges();
+            RepoController.Context.SaveChanges();
 
             //..Return to the original list of movies to see our changes/additions
             return RedirectToAction("Index", "Movies");
@@ -61,24 +61,24 @@ namespace ASPVidly.Controllers
 
         public ActionResult Edit(int id)
         {
-            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+            var movie = RepoController.Context.Movies.SingleOrDefault(m => m.Id == id);
 
             if (movie == null)
                 return HttpNotFound();
 
             var viewModel = new MovieFormViewModel()
             {
-                Genres = _context.Genres.ToList()
+                Genres = RepoController.Context.Genres.ToList()
             };
 
             VidlyMapper.Map(movie, viewModel);
 
-            return ViewFor(MOVIE_FORM, viewModel);
+            return RepoController.ViewFor(MOVIE_FORM, viewModel);
         }
 
         public ViewResult Index()
         {
-            var movies = _context.Movies.Include(c => c.Genre);
+            var movies = RepoController.Context.Movies.Include(c => c.Genre);
 
             return View(movies);
         }
@@ -88,7 +88,7 @@ namespace ASPVidly.Controllers
             if (id == null)
                 return RedirectToAction("Index");
 
-            Movie movie = _context.Movies.Include(c => c.Genre).FirstOrDefault(m => m.Id == id);
+            Movie movie = RepoController.Context.Movies.Include(c => c.Genre).FirstOrDefault(m => m.Id == id);
 
             if (movie == null)
                 return View("UnknownMovie");

@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ASPTute_Vidly.Controllers;
 using WebGrease.Configuration;
 
 namespace ASPTute_Vidly
@@ -14,12 +15,13 @@ namespace ASPTute_Vidly
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             VidlyMapper.RegisterMappings();
+            RepoController.Init();
         }
     }
 }

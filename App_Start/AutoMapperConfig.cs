@@ -4,9 +4,11 @@ using ASPVidly.Models;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using ASPTute_Vidly.Dtos;
 
 namespace ASPTute_Vidly
 {
@@ -27,6 +29,10 @@ namespace ASPTute_Vidly
                 cfg.CreateMap<Customer, Customer>();
                 cfg.CreateMap<Movie, MovieFormViewModel>();
                 cfg.CreateMap<Customer, CustomerFormViewModel>();
+                cfg.CreateMap<Customer, CustomerDto>();
+                cfg.CreateMap<CustomerDto, Customer>();
+                cfg.CreateMap<Movie, MovieDto>();
+                cfg.CreateMap<MovieDto, Movie>();
             });
 
             _mapper = new Mapper(config);
@@ -54,5 +60,17 @@ namespace ASPTute_Vidly
 
             return mappedObject;
         }
+
+
+        //Create a generic method that takes in an arbritrary object and implicitly infers ("guesses") its typename and uses it for map checking 
+        /*public static D Map<D>(object source) where D : new()
+        {
+            Type t = typeof();
+
+            if (!HasMap<, D>())
+                throw new MissingMapException<S, D>();
+
+            D mappedObject = _mapper.Map(source, (destination != null) ? destination : new D());
+        }*/
     }
 }

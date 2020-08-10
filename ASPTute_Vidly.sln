@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1169
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPTute_Vidly", "ASPTute_Vidly.csproj", "{7D5B15E3-CFB0-4622-88C8-AA257DA309D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPTute_Vidly_Tests", "..\ASPTute_Vidly_Tests\ASPTute_Vidly_Tests.csproj", "{245B928B-7540-4EB2-BF13-B6F8AABF5C97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7D5B15E3-CFB0-4622-88C8-AA257DA309D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D5B15E3-CFB0-4622-88C8-AA257DA309D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D5B15E3-CFB0-4622-88C8-AA257DA309D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{245B928B-7540-4EB2-BF13-B6F8AABF5C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{245B928B-7540-4EB2-BF13-B6F8AABF5C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{245B928B-7540-4EB2-BF13-B6F8AABF5C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{245B928B-7540-4EB2-BF13-B6F8AABF5C97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

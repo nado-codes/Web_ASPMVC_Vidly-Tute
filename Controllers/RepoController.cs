@@ -11,18 +11,23 @@ using ASPTute_Vidly.ViewModels;
 
 namespace ASPTute_Vidly.Controllers
 {
-    public class DbController : Controller
+    public sealed class RepoController : Controller
     {
-        protected ApplicationDbContext _context;
+        private static RepoController _singleton;
 
-        public DbController()
+        public static ApplicationDbContext Context { get; private set; }
+
+        private RepoController(){}
+
+        public static void Init()
         {
-            _context = new ApplicationDbContext();
+            Context = new ApplicationDbContext();
+            _singleton = new RepoController();
         }
 
         protected override void Dispose(bool disposing)
         {
-            _context.Dispose();
+            Context.Dispose();
         }
 
         /// <summary>
@@ -31,11 +36,11 @@ namespace ASPTute_Vidly.Controllers
         /// <typeparam name="V"></typeparam>
         /// <param name="viewName"></param>
         /// <returns></returns>
-        protected ActionResult ViewFor<V>(string viewName, V viewModel = default(V)) where V : new()
+        public static ActionResult ViewFor<V>(string viewName, V viewModel = default(V)) where V : new()
         {
-            V newViewModel = (viewModel == null) ? VidlyMapper.Map(_context, new V()) : viewModel;
+            V newViewModel = (viewModel == null) ? VidlyMapper.Map(Context, new V()) : viewModel;
 
-            return View(viewName, newViewModel);
+            return _singleton.View(viewName, newViewModel);
         }
     }
 }
